@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import MessageFormUI from "../MessageFormUI";
+import React,{useState} from "react";
+import MessageFormUI from "./MessageFormUI";
+import { usePostAiTextMutation } from "@/state/api";
 
-const StanderedMessageForm = ({ props, activeChat }) => {
+const Ai = ({ props, activeChat }) => {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState("");
+  const [trigger]=usePostAiTextMutation();
+
 
   const handleMessageChange = (e) => {
     setMessage(e.target.value);
@@ -24,6 +27,7 @@ const StanderedMessageForm = ({ props, activeChat }) => {
     };
 
     props.onSubmit(form);
+    trigger(form)
     setMessage("");
     setAttachment("");
   };
@@ -37,4 +41,4 @@ const StanderedMessageForm = ({ props, activeChat }) => {
   );
 };
 
-export default StanderedMessageForm;
+export default Ai;

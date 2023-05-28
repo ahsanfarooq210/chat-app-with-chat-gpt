@@ -6,6 +6,7 @@ import {
 } from "react-chat-engine-advanced";
 import CustomHeader from './../headers/CustomHeaders';
 import StanderedMessageForm from './../customMessageForms/standeredMessageForm/StanderedMessageForm';
+import Ai from "../customMessageForms/Ai";
 
 const Chat = () => {
     const chatProps=useMultiChatLogic(
@@ -20,6 +21,9 @@ const Chat = () => {
         style={{height:"100vh",}}
         renderChatHeader={(chat)=><CustomHeader chat={chat}/>}
         renderMessageForm={(props)=>{
+          if(chatProps.chat?.title.startsWith('AiChat_')){
+            return <Ai props={props}  activeChat={chatProps.chat} />
+          }
           return <StanderedMessageForm props={props} activeChat={chatProps.chat} />
         }}
     />
